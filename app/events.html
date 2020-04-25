@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script type="text/javascript" src="js/jquery-3.5.0.min.js"></script>
+
+    <script>
+      $(function () {
+        // Exercise 16
+        $("#bt1").click(function (event) {
+          alert("BTN 1 CLICKED USING REGULAR CLICK EVENT");
+        });
+
+        // Exercise 17
+        $("#bt2").bind("click", function () {
+          alert("BTN 2 CLICKED USING BIND CLICK EVENT");
+        });
+
+        // Exercise 18
+        $("#bt3").on("click", function () {
+          alert("BTN 3 CLICKED USING ON CLICK EVENT");
+        });
+
+        // Exercise 19
+        $(".same-handler").on("click", function () {
+          alert("BTN 4 OR 5 CLICKED USING ON CLICK EVENT");
+        });
+
+        // Exercise 20
+        $("body").on(
+          {
+            mouseenter: function () {
+              alert("Cursor entered the div!");
+            },
+            mouseleave: function () {
+              alert("Cursor left the div!");
+            },
+          },
+          ".div-handler"
+        );
+
+        // Exercise 21
+        $("body").on(
+          {
+            mouseenter: function () {
+              alert("Cursor entered the span!");
+            },
+            mouseleave: function () {
+              alert("Cursor left the span!");
+            },
+            click: function () {
+              alert("Span Click event!");
+            },
+          },
+          ".span-handler"
+        );
+
+        // Exercise 22
+        $("#bt-add-link").click(function (event) {
+          var btn = $("#bt-add-link");
+          $("<br /><br /><a>new link</a>")
+            .appendTo("#div-link")
+            .attr("href", "www.modulemedia.com")
+            .attr("target", "_blank");
+
+          alert(event.target.nodeName + " triggered the event.");
+        });
+
+        // Exercise 23
+        $(window).resize(function () {
+          $("#div-resize").text(
+            "width " + $(window).width() + " " + "height " + $(window).height()
+          );
+        });
+
+        // Exercise 24
+        $("#input-focus").focus(function () {
+          $(this).next("span").css("display", "inline").fadeOut(1000);
+          $(this).css("background-color", "red");
+        });
+
+        $("#input-focus").focusout(function () {
+          $(this).css("background-color", "#FFFFFF");
+        });
+
+        // Exercise 25
+        $("#form-submit").click(function (event) {
+          var spanA = $("#field-span-validation_1");
+          var spanB = $("#field-span-validation_2");
+
+          var inputA = $("#field-validation_1");
+          var inputB = $("#field-validation_2");
+
+          event.preventDefault();
+          if (!inputA.val()) {
+            spanA.css("display", "inline").fadeOut(5000);
+          }
+          if (!inputB.val()) {
+            spanB.css("display", "inline").fadeOut(5000);
+          }
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div>
+      <button id="bt1">Click Me BT 1</button>
+      <button id="bt2">Click Me BT 2</button>
+      <button id="bt3">Click Me BT 3</button>
+      <button class="same-handler">Click Me BT 4</button>
+      <button class="same-handler">Click Me BT 5</button>
+    </div>
+    <br />
+    <lable>Div </lable>
+    <div
+      class="div-handler"
+      style="border: solid 1px; width: 300px; height: 30px;"
+    ></div>
+    <br />
+    <lable>Span </lable>
+    <span
+      class="span-handler"
+      style="border: solid red 1px; display: block; width: 300px; height: 30px;"
+      >&nbsp;</span
+    >
+    <br />
+    <br />
+    <div id="div-link">
+      <button id="bt-add-link">Will add a link</button>
+    </div>
+    <br />
+    <div id="div-resize"></div>
+    <br />
+    <input id="input-focus" type="text" />&nbsp;&nbsp;<span
+      style="display: none;"
+      >focus fire</span
+    >
+    <br />
+    <br />
+    <form>
+      <fieldset>
+        <legend>Choose your favorite</legend>
+        <br />
+        <label>Name</label>
+        <input type="text" id="field-validation_1" /><span
+          id="field-span-validation_1"
+          value="some text"
+          style="display: none; color: red;"
+          >&nbsp;&nbsp;Mandatory Field</span
+        ><br /><br />
+        <label>Email</label>
+        <input type="text" id="field-validation_2" /><span
+          id="field-span-validation_2"
+          style="display: none; color: red;"
+          >&nbsp;&nbsp;Mandatory Field</span
+        ><br /><br />
+        <button id="form-submit" type="submit">Submit</button>
+      </fieldset>
+    </form>
+  </body>
+</html>
